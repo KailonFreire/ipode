@@ -70,10 +70,23 @@ void inicializarDados(){
   pedido.data = DateTime.parse("2023-03-10");
   pedido.addPedidos(pedido);
 
+  pedido.id = 2;
+  pedido.idEntregador = 1;
+  pedido.telefoneCliente = "71 98763-5727";
+  pedido.status = "Preparando";
+  pedido.taxaEntrega = 10;
+  pedido.data = DateTime.parse("2023-04-10");
+  pedido.addPedidos(pedido);
+
   //Itens Pedidos
   itemPedido.idMarmita = 1;
   itemPedido.idPedido = 1;
   itemPedido.quantidade = 2;
+  itemPedido.addItens_Pedidos(itemPedido);
+
+  itemPedido.idMarmita = 1;
+  itemPedido.idPedido = 2;
+  itemPedido.quantidade = 3;
   itemPedido.addItens_Pedidos(itemPedido);
 }
 
@@ -178,18 +191,20 @@ void main(List<String> arguments) {
           case 1:
             int opC = 0;
             do {
-             menuCadastros();
+              menuCadastros();
               opC = int.parse(stdin.readLineSync()!);
               switch (opC) {
                 case 1:
-                  //clientes
+                //clientes
                   cadastrarCliente();
                   break;
                 case 2:
                 //Entregadores
                   print("Informe o nome da empresa: ");
                   empresa.nome = stdin.readLineSync()!;
-                  empresa.id = Empresa.empresas.last.id > 0 ? Empresa.empresas.last.id + 1 : 1;
+                  empresa.id = Empresa.empresas.last.id > 0
+                      ? Empresa.empresas.last.id + 1
+                      : 1;
                   print("Informe o cnpj da empresa: ");
                   empresa.cnpj = stdin.readLineSync()!;
                   print("Informe o email da empresa: ");
@@ -206,11 +221,13 @@ void main(List<String> arguments) {
                   break;
                 case 3:
                 //Empresas
-                 cadastrarEmpresa();
+                  cadastrarEmpresa();
                   break;
                 case 4:
                 //Marmitas
-                  marmita.id = Marmita.marmitas.last.id > 0 ? Marmita.marmitas.last.id + 1 : 1;
+                  marmita.id = Marmita.marmitas.last.id > 0
+                      ? Marmita.marmitas.last.id + 1
+                      : 1;
                   print("Informe o nome da marmita: ");
                   marmita.nome = stdin.readLineSync()!;
                   print("Informe a descrição da marmita: ");
@@ -223,7 +240,7 @@ void main(List<String> arguments) {
                   print(marmita.getMarmitas());
                   break;
                 case 5:
-                  //Entregador
+                //Entregador
                   print("Informe o id do entregador: ");
                   pedido.idEntregador = int.parse(stdin.readLineSync()!);
                   print("Informe o tel do entregador: ");
@@ -233,7 +250,8 @@ void main(List<String> arguments) {
                   break;
                 case 6:
                   print("Informe o id do pedido: ");
-                  itemPedido.idPedido = Pedido.pedidos.last.id > 0 ? Pedido.pedidos.last.id + 1 : 1;
+                  itemPedido.idPedido =
+                  Pedido.pedidos.last.id > 0 ? Pedido.pedidos.last.id + 1 : 1;
                   print("Innforme o id da marmita: ");
                   itemPedido.idMarmita = int.parse(stdin.readLineSync()!);
                   print("Innforme a quantidade: ");
@@ -256,14 +274,15 @@ void main(List<String> arguments) {
           case 4:
           //relatorios
             int opR = 0;
-            menuRelatorios();
-            opR = int.parse(stdin.readLineSync()!);
+
             do {
+              menuRelatorios();
+              opR = int.parse(stdin.readLineSync()!);
               switch (opR) {
                 case 1:
                   print("Informe o id do pedido");
-                  int idPedido = int.parse(stdin.readLineSync()!);
-                  print(pedido.getPedidoMarmitaQtd(idPedido));
+                  // int idPedido = int.parse(stdin.readLineSync()!);
+                  // print(pedido.getPedidoMarmitaQtd(idPedido));
                   m.getMarmitaMaisVendida();
                   m.getMarmitaMenosVendida();
                   break;
@@ -273,29 +292,33 @@ void main(List<String> arguments) {
                   pedido.getPedidosByTel(telCliente);
                   break;
                 case 3:
-                  //Entregador por id
+                //Entregador por id
                   print("Informe o telefone do entregador: ");
                   String telEntregador = stdin.readLineSync()!;
-                  Entregador entregadorByTel = Entregador.entregadores.firstWhere((entregadores) => entregadores.celular == telEntregador);
+                  Entregador entregadorByTel = Entregador.entregadores
+                      .firstWhere((entregadores) =>
+                  entregadores.celular == telEntregador);
                   print(entregador.getEntregador(entregadorByTel.id));
                   print(entregador.entregadorComMaisCorridas());
                   break;
                 case 4:
-                  //Entregador com menos corridas
+                //Entregador com menos corridas
                   print(entregador.entregadorComMenosCorridas());
                   break;
                 case 5:
                 //exibir pedidos por clientex
                   print("Informe o telefone do cliente: ");
                   String telCliente = stdin.readLineSync()!;
+                  pedido.getPedidosByTel(telCliente); //71 98763-5727
                   print(cl.getClienteByTel(telCliente));
-                  pedido.getPedidosByTel(telCliente);
                   break;
+                case 6:
+                  print("Voltando ao menu principal");
               }
             } while (opR != 6);
             break;
         }
-      } while (op != 5);
+      }while (op != 5);
     } else if(opL == 2){
       String email = "";
       String senha = "";

@@ -28,9 +28,7 @@ class Pedido{
   }
 
   void getPedidosByTel(String tel){
-    String dados = "";
     Iterable<Pedido> pedidosByTel = Pedido.pedidos.where((pedidos) => pedidos.telefoneCliente == tel);
-
     // pedidosByTel.forEach((element) {
     //  dados +=
     //  [
@@ -42,7 +40,7 @@ class Pedido{
     // ].forEach(print);
     // });
     pedidosByTel.forEach((pedidos) {
-      Pedido p = Pedido.pedidos.firstWhere((pedidos) => pedidos.telefoneCliente == tel);
+      Pedido p = Pedido.pedidos.firstWhere((p) => p.telefoneCliente == tel);
       Cliente c = Cliente.clientes.firstWhere((c) => c.telefone == telefoneCliente);
       ItemPedido ip = ItemPedido.itensPedidos.firstWhere((ip) => ip.idPedido == id);
       Marmita m = Marmita.marmitas.firstWhere((m) => m.id == ip.idMarmita);
@@ -52,12 +50,11 @@ class Pedido{
       'marmita: ${m.nome}',
       'data: $p.data',
       'entregador: ${e.nome}',
-      'total: ${m.valor * ip.quantidade}'
+      'total: ${m.valor * ip.quantidade} \n'
       ].forEach(print);
     });
 
   }
-
 
   void stats(int id){
     pedidos.contains(id) ? pedidos[id].status = "entregue" : print("Nenhum pedido para atualizar!");
@@ -73,17 +70,17 @@ class Pedido{
     return pedidos;
   }
 
-  String getPedidoMarmitaQtd(int idPedido) {
-    String dados = "";
-    int id = idPedido;
-    // for(pedidos in pedidos[id]) {
-    //   dados += "Telefone do cliente: ${pedidos[id].telefoneCliente} \n"
-    //       "ID do entregador: ${pedidos[id].idEntregador} \n"
-    //       "Status do pedido: ${pedidos[id].status} \n"
-    //       "Taxa de entrega: ${pedidos[id].taxaEntrega} \n"
-    //       "data: ${pedidos[id].data} \n";
-    // }
-    return dados;
-  }
+  // String getPedidoMarmitaQtd(int idPedido) {
+  //   String dados = "";
+  //   int id = idPedido;
+  //   for(pedidos in pedidos[id]) {
+  //     dados += "Telefone do cliente: ${pedidos[id].telefoneCliente} \n"
+  //         "ID do entregador: ${pedidos[id].idEntregador} \n"
+  //         "Status do pedido: ${pedidos[id].status} \n"
+  //         "Taxa de entrega: ${pedidos[id].taxaEntrega} \n"
+  //         "data: ${pedidos[id].data} \n";
+  //   }
+  //   return dados;
+  // }
 
 }

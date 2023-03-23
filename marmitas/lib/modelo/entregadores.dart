@@ -11,7 +11,7 @@ class Entregador{
   static List<Entregador> entregadores = [];
 
   String getEntregador(int id){
-    String dados = "rpz";
+    String dados = "";
     if(entregadores.contains(id)){
       dados += "ID: ${entregadores[id].id} \n"
           "ID Empresa: ${entregadores[id].idEmpresa} \n"
@@ -38,7 +38,7 @@ class Entregador{
           "CPF: ${entregadores[i].cpf} \n"
           "RG: ${entregadores[i].rg} \n"
           "Celular: ${entregadores[i].celular} \n";
-      "Taxas: ${entregadores[id].taxa}\n";
+          "Taxas: ${entregadores[id].taxa}\n";
     }
     return dados;
   }
